@@ -15,15 +15,15 @@ function App() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        dispatch(increment());
+        dispatch(increment(4));
     }, [dispatch]);
 
     const onIncrement = () => {
-        dispatch(increment());
+        dispatch(increment(5));
     };
 
     const onIncrementAsync = () => {
-        dispatch(incrementAsync());
+        dispatch(incrementAsync(22));
     };
 
     return (

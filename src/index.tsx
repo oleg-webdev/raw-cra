@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware } from 'redux';
+import { createStore, applyMiddleware, Middleware } from 'redux';
 import { Provider } from 'react-redux';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from './store/thunk-middleware';
@@ -10,9 +10,9 @@ import App from './App';
 import rootReducer from './store';
 import reportWebVitals from './reportWebVitals';
 
-// @ts-ignore
-const customMiddleWare = (store) => (next) => (action) => {
+const customMiddleWare: Middleware = store => next => action => {
     console.log('Middleware triggered:', action);
+
     next(action);
 };
 
