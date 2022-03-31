@@ -1,10 +1,9 @@
-import { combineReducers } from 'redux';
-import user from './user';
-import counter from './counter';
+import { configureStore } from '@reduxjs/toolkit';
+import counterReducer from './counter';
 
-const rootReducer = combineReducers({
-    user,
-    counter,
+export default configureStore({
+  reducer: {
+    counter: counterReducer,
+  },
+  devTools: process.env.NODE_ENV !== 'production',
 });
-
-export default rootReducer;

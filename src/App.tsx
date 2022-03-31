@@ -1,51 +1,42 @@
-import React, { useEffect, useState } from 'react';
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.scss';
 import { useDispatch, useSelector } from 'react-redux';
-import { increment, incrementAsync } from './store/counter';
+import { increment, decrement, incrementByAmount, incrementAsync, selectCount } from './store/counter';
 
-type stateType = {
-    counter: number;
-    user: Object;
-};
+export function App() {
+  const [cnt, setCnt] = useState(0);
 
-function App() {
-    const [some, setSome] = useState(0);
-    const counter = useSelector((state: stateType) => state.counter);
-    const dispatch = useDispatch();
+  const dispatch = useDispatch();
+  const count = useSelector(selectCount);
 
-    useEffect(() => {
-        dispatch(increment(4));
-    }, [dispatch]);
+  const onIncrement = () => {
+    dispatch(increment());
+  };
 
-    const onIncrement = () => {
-        dispatch(increment(5));
-    };
+  const onincrementByAmount = () => {
+    dispatch(incrementByAmount(1));
+  };
 
-    const onIncrementAsync = () => {
-        dispatch(incrementAsync(22));
-    };
-
-    return (
-        <div className="App">
-            <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                    <strong>local: {some}</strong>
-                </p>
-                <p>
-                    <strong>store: {counter}</strong>
-                </p>
-                <button onClick={() => setSome(some + 1)}>set local</button>
-                <button onClick={onIncrement}>increment store</button>
-
-                <button onClick={onIncrementAsync}>increment async store</button>
-                <a className="App-link" href="https://reactjs.org" target="_blank" rel="noopener noreferrer">
-                    Learn React
-                </a>
-            </header>
-        </div>
-    );
+  return (
+    <div className='App'>
+      <header className='App-header'>
+        <span>{count}</span>
+        <button aria-label='Increment value' onClick={() => setCnt(cnt + 1)}>
+          Local: {cnt}
+        </button>
+        <button aria-label='Increment value' onClick={onIncrement}>
+          Increment
+        </button>
+        <button aria-label='Increment value' onClick={() => dispatch(onincrementByAmount)}>
+          Increment by amount
+        </button>
+        <button aria-label='Increment value' onClick={() => dispatch(incrementAsync(1))}>
+          Increment async
+        </button>
+        <button aria-label='Decrement value' onClick={() => dispatch(decrement())}>
+          Decrement
+        </button>
+      </header>
+    </div>
+  );
 }
-
-export default App;

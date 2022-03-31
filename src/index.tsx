@@ -1,31 +1,23 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
-import { createStore, applyMiddleware, Middleware } from 'redux';
+import { createRoot } from 'react-dom/client';
 import { Provider } from 'react-redux';
-import { composeWithDevTools } from 'redux-devtools-extension';
-import thunk from './store/thunk-middleware';
 
-import './index.css';
-import App from './App';
-import rootReducer from './store';
+import { App } from './App';
+import store from './store';
 import reportWebVitals from './reportWebVitals';
 
-const customMiddleWare: Middleware = store => next => action => {
-    console.log('Middleware triggered:', action);
+const rootElement = document.getElementById('root');
 
-    next(action);
-};
+if (!rootElement) {
+  throw new Error('ROOT IS MISSED!!!');
+}
 
-const composeEnhancer = composeWithDevTools({});
-const store = createStore(rootReducer, composeEnhancer(applyMiddleware(thunk, customMiddleWare)));
+const root = createRoot(rootElement);
 
-ReactDOM.render(
-    <React.StrictMode>
-        <Provider store={store}>
-            <App />
-        </Provider>
-    </React.StrictMode>,
-    document.getElementById('root')
+root.render(
+  <Provider store={store}>
+    <App />
+  </Provider>
 );
 
 reportWebVitals();
