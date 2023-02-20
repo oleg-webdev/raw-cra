@@ -1,8 +1,8 @@
 {
   "name": "my-app",
   "version": "0.1.0",
-  "homepage": "https://github.com/oleg-webdev/raw-cra",
-  "private": true,
+  "homepage": "http://oleg-webdev.github.io/raw-cra",
+  "private": false,
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.0",
     "@testing-library/jest-dom": "^5.16.3",
